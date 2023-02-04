@@ -1,0 +1,132 @@
+.u-section-1 .u-sheet-1 {
+  min-height: 866px;
+}
+
+.u-section-1 .u-group-1 {
+  width: 654px;
+  min-height: 520px;
+  height: auto;
+  margin: 68px auto 60px;
+}
+
+.u-section-1 .u-container-layout-1 {
+  padding: 0 20px;
+}
+
+.u-section-1 .u-text-1 {
+  font-weight: 700;
+  font-size: 2.25rem;
+  margin: 64px 20px 0;
+}
+
+.u-section-1 .u-text-2 {
+  margin: 49px 20px 0;
+}
+
+.u-section-1 .u-social-icons-1 {
+  height: 54px;
+  min-height: 16px;
+  width: 330px;
+  min-width: 140px;
+  white-space: nowrap;
+  margin: 49px auto 0;
+}
+
+.u-section-1 .u-icon-1 {
+  height: 100%;
+}
+
+.u-section-1 .u-icon-2 {
+  height: 100%;
+}
+
+.u-section-1 .u-icon-3 {
+  height: 100%;
+}
+
+.u-section-1 .u-icon-4 {
+  height: 100%;
+}
+
+.u-section-1 .u-icon-5 {
+  height: 100%;
+}
+
+.u-section-1 .u-btn-1 {
+  font-size: 0.875rem;
+  letter-spacing: 1px;
+  border-style: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-image: none;
+  margin: 55px auto 0;
+}
+
+@media (max-width: 1199px) {
+  .u-section-1 .u-group-1 {
+    margin-top: 56px;
+    height: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-1 .u-group-1 {
+    width: 540px;
+  }
+
+  .u-section-1 .u-container-layout-1 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .u-section-1 .u-text-2 {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-1 .u-group-1 {
+    min-height: 606px;
+    margin-top: 52px;
+    margin-right: initial;
+    margin-left: initial;
+    width: auto;
+  }
+
+  .u-section-1 .u-container-layout-1 {
+    padding: 30px 0;
+  }
+
+  .u-section-1 .u-text-1 {
+    font-size: 1.5rem;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .u-section-1 .u-text-2 {
+    width: auto;
+    margin-top: 34px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .u-section-1 .u-social-icons-1 {
+    width: 303px;
+    height: 49px;
+    margin-top: 55px;
+  }
+
+  .u-section-1 .u-icon-3 {
+    height: 37px;
+  }
+
+  .u-section-1 .u-btn-1 {
+    margin-top: 58px;
+  }
+}
