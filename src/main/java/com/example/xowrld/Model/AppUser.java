@@ -1,6 +1,6 @@
 package com.example.xowrld.Model;
 
-import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,7 +15,6 @@ import java.util.List;
 
 @Table(name = "appuser")
 @Entity
-@Data
 public class AppUser implements UserDetails {
 
     @Id
@@ -34,7 +33,7 @@ public class AppUser implements UserDetails {
     @Enumerated
     private ROLE role;
 
-    //@ColumnDefault(value = "true")
+    @ColumnDefault(value = "true")
     private boolean isEnabled;
 
     @CreationTimestamp
