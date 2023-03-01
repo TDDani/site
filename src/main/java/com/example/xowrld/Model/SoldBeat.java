@@ -4,7 +4,9 @@ package com.example.xowrld.Model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Table(name = "soldbeat")
 @Entity
 public class SoldBeat {
 

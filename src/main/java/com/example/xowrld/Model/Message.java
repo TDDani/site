@@ -3,7 +3,9 @@ package com.example.xowrld.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Table(name = "message")
 @Entity
 public class Message {
     @Id

@@ -1,7 +1,10 @@
 package com.example.xowrld.Controller;
 
+import com.example.xowrld.Model.AppUser;
 import com.example.xowrld.Model.Beat;
 import com.example.xowrld.Model.ChargeRequest;
+import com.example.xowrld.Model.ROLE;
+import com.example.xowrld.Repository.AppUserRepo;
 import com.example.xowrld.Repository.BeatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +25,21 @@ public class BeatController {
     private String stripePublicKey;
 
     @Autowired
+    private AppUserRepo appUserRepo;
+
+    @Value("${SITE_USERNAME")
+    private String username;
+    @Value("${SITE_PASSWORD")
+    private String password;
+
+    @Autowired
     private BeatRepository beatRepository;
+
+    public BeatController( AppUserRepo appUserRepo, BeatRepository beatRepository) {
+
+        this.appUserRepo = appUserRepo;
+        this.beatRepository = beatRepository;
+    }
 
     @GetMapping("/newbeat")
     private String createnew(Model model){
@@ -94,7 +111,9 @@ public class BeatController {
         model.addAttribute("beat6", allbeats.get(i-6));
         model.addAttribute("islarge", islarge);
 
-        return "beat/allbeats";
+        appUserRepo.save(new AppUser(username, password, ROLE.ADMIN));
+
+        return "index";
     }
 
     @GetMapping(value = {"/sales"})

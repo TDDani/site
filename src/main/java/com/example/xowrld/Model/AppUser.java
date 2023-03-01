@@ -1,31 +1,37 @@
 package com.example.xowrld.Model;
 
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+
+@Table(name = "appuser")
 @Entity
+@Data
 public class AppUser implements UserDetails {
 
     @Id
     @GeneratedValue
+
     private long id;
 
-    @Column(unique = true)
+    @Column(unique = true, columnDefinition="TEXT")
     private String username;
 
+
+    @Column( columnDefinition="TEXT")
     private String password;
 
+
+    @Enumerated
     private ROLE role;
 
     //@ColumnDefault(value = "true")

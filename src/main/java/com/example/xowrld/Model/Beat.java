@@ -1,25 +1,33 @@
 package com.example.xowrld.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serial;
 import java.net.URL;
 
+
+@Table(name = "public.beat")
 @Entity
 public class Beat {
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Serial
+    private int id;
+
+    @Column(name = "title")
     private String title;
 
+    @Column(name = "mkey")
     private String mkey;
+
+    @Column(name = "bpm")
     private Integer bpm;
 
+    @Column(name = "url", insertable = false, updatable = false)
     private URL accessurl;
-
+    @Column(name = "price")
     private int price;
 
-
+    @Column(name = "urly", insertable = false, updatable = false)
     private URL url;
 
     public Beat() {
@@ -50,11 +58,12 @@ public class Beat {
         this.url = url;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -105,4 +114,19 @@ public class Beat {
     public void setUrl(URL url) {
         this.url = url;
     }
+
+    @Override
+    public String toString() {
+        return "Beat{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", mkey='" + mkey + '\'' +
+                ", bpm=" + bpm +
+                ", accessurl=" + accessurl +
+                ", price=" + price +
+                ", url=" + url +
+                '}';
+    }
+
+
 }

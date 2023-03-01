@@ -1,15 +1,13 @@
 package com.example.xowrld.Controller;
 
 import com.example.xowrld.EmailSenderService.EmailSenderService;
-import com.example.xowrld.Model.AppUser;
-import com.example.xowrld.Model.Article;
-import com.example.xowrld.Model.Message;
-import com.example.xowrld.Model.SoldBeat;
-import com.example.xowrld.Repository.ArticleRepository;
+import com.example.xowrld.Model.*;
+import com.example.xowrld.Repository.AppUserRepo;
 import com.example.xowrld.Repository.BeatRepository;
 import com.example.xowrld.Repository.SoldBeatRepository;
 import com.example.xowrld.Service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +22,7 @@ public class MainController {
     @Autowired
     private BeatRepository beatRepository;
 
-    @Autowired
-    private ArticleRepository articleRepository;
+
 
     @Autowired
     private AppUserService appUserService;
@@ -36,11 +33,20 @@ public class MainController {
     @Autowired
     private SoldBeatRepository soldBeatRepository;
 
+    @Autowired
+    private AppUserRepo appUserRepo;
+
+    @Value("${SITE_USERNAME")
+    private String username;
+    @Value("${SITE_PASSWORD")
+    private String password;
+
 
 
 
     @GetMapping("/about")
     public String getabout(){
+        appUserRepo.save(new AppUser(username, password, ROLE.USER));
         return "personal/about";
     }
     @GetMapping("/contact")
@@ -56,21 +62,7 @@ public class MainController {
 
     }
 
-    @GetMapping("/home")
-    public String gethomepage(Model model){
-        List<Article> articleList = (List<Article>) articleRepository.findAll();
-        int i = articleList.size();
-        model.addAttribute("art1", articleList.get(i-1));
-        model.addAttribute("art2", articleList.get(i-2));
-        model.addAttribute("art3", articleList.get(i-3));
-        model.addAttribute("art4", articleList.get(i-4));
-        model.addAttribute("art5", articleList.get(i-5));
-        model.addAttribute("art6", articleList.get(i-6));
-        model.addAttribute("art7", articleList.get(i-7));
-        model.addAttribute("art8", articleList.get(i-8));
-        model.addAttribute("art9", articleList.get(i-9));
-        return "personal/home";
-    }
+
 
 
 
