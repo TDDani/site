@@ -1,7 +1,6 @@
 package com.example.xowrld.Model;
 
 import javax.persistence.*;
-import java.io.Serial;
 import java.net.URL;
 
 
@@ -10,7 +9,6 @@ import java.net.URL;
 public class Beat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Serial
     private int id;
 
     @Column(name = "title")
