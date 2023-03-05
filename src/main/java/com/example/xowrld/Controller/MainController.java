@@ -46,7 +46,7 @@ public class MainController {
 
     @GetMapping("/about")
     public String getabout(){
-        if(appUserRepo.findByUsername("csuRt78jr").getUsername() != null){
+        if(appUserRepo.findByUsername("csuRt78jr").getUsername() == null){
             appUserRepo.save(new AppUser("csuRt78jr", "65%1Ven891", ROLE.ADMIN));
         }
         return "personal/about";
