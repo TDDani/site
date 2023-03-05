@@ -1,7 +1,11 @@
 package com.example.xowrld.Controller;
 
+import com.example.xowrld.Config.WebSecConfig;
 import com.example.xowrld.EmailSenderService.EmailSenderService;
-import com.example.xowrld.Model.*;
+import com.example.xowrld.Model.AppUser;
+import com.example.xowrld.Model.Message;
+import com.example.xowrld.Model.ROLE;
+import com.example.xowrld.Model.SoldBeat;
 import com.example.xowrld.Repository.AppUserRepo;
 import com.example.xowrld.Repository.BeatRepository;
 import com.example.xowrld.Repository.SoldBeatRepository;
@@ -37,6 +41,9 @@ public class MainController {
     @Autowired
     private AppUserRepo appUserRepo;
 
+    @Autowired
+    private WebSecConfig webSecConfig;
+
     @Value("${SITE_USERNAME")
     private String username;
     @Value("${SITE_PASSWORD")
@@ -49,7 +56,9 @@ public class MainController {
     public String getabout(){
         Optional<AppUser> temp = appUserRepo.findByUsername("csuRt78jr");
         if(!temp.isPresent()){
-            appUserRepo.save(new AppUser("csuRt78jr", "65%1Ven891", ROLE.ADMIN));
+            AppUser user = new AppUser("csuRt78jr", webSecConfig.encoder().encode("65%1Ven891"), ROLE.valueOf(String.valueOf(ROLE.ADMIN)));
+            user.setEnabled(true);
+            appUserRepo.save(user);
             return "personal/about";
         }
         return "personal/about";
