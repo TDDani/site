@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.mail.MessagingException;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -46,8 +47,10 @@ public class MainController {
 
     @GetMapping("/about")
     public String getabout(){
-        if(appUserRepo.findByUsername("csuRt78jr").getUsername() == null){
+        Optional<AppUser> temp = appUserRepo.findByUsername("csuRt78jr");
+        if(!temp.isPresent()){
             appUserRepo.save(new AppUser("csuRt78jr", "65%1Ven891", ROLE.ADMIN));
+            return "personal/about";
         }
         return "personal/about";
     }
