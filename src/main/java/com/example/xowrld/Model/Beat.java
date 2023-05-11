@@ -4,12 +4,13 @@ import javax.persistence.*;
 import java.net.URL;
 
 
-@Table(name = "public.beat")
 @Entity
 public class Beat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
+
+    private String header;
 
     @Column(name = "title")
     private String title;
@@ -20,49 +21,41 @@ public class Beat {
     @Column(name = "bpm")
     private Integer bpm;
 
-    @Column(name = "url", insertable = false, updatable = false)
-    private URL accessurl;
     @Column(name = "price")
     private int price;
 
-    @Column(name = "urly", insertable = false, updatable = false)
-    private URL url;
+    private String previewurl;
+
+
+    private String accessurl;
 
     public Beat() {
     }
 
-    public Beat(String title, String mkey, Integer bpm, URL accessurl, URL url) {
+    public Beat(String header, String title, String mkey, Integer bpm, int price, String previewurl, String accessurl) {
+        this.header = header;
         this.title = title;
         this.mkey = mkey;
         this.bpm = bpm;
-        this.accessurl = accessurl;
-
-        this.url = url;
-    }
-
-    public Beat(String title, String mkey, Integer bpm, URL url) {
-        this.title = title;
-        this.mkey = mkey;
-        this.bpm = bpm;
-        this.url = url;
-    }
-
-    public Beat(String title, String mkey, Integer bpm,URL url, URL accessurl, int price) {
-        this.title = title;
-        this.mkey = mkey;
-        this.bpm = bpm;
-        this.accessurl = accessurl;
         this.price = price;
-        this.url = url;
+        this.previewurl = previewurl;
+        this.accessurl = accessurl;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
     }
 
     public String getTitle() {
@@ -89,14 +82,6 @@ public class Beat {
         this.bpm = bpm;
     }
 
-    public URL getAccessurl() {
-        return accessurl;
-    }
-
-    public void setAccessurl(URL accessurl) {
-        this.accessurl = accessurl;
-    }
-
     public int getPrice() {
         return price;
     }
@@ -105,26 +90,22 @@ public class Beat {
         this.price = price;
     }
 
-    public URL getUrl() {
-        return url;
+    public String getPreviewurl() {
+        return previewurl;
     }
 
-    public void setUrl(URL url) {
-        this.url = url;
+    public void setPreviewurl(String previewurl) {
+        this.previewurl = previewurl;
     }
 
-    @Override
-    public String toString() {
-        return "Beat{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", mkey='" + mkey + '\'' +
-                ", bpm=" + bpm +
-                ", accessurl=" + accessurl +
-                ", price=" + price +
-                ", url=" + url +
-                '}';
+    public String getAccessurl() {
+        return accessurl;
     }
 
-
+    public void setAccessurl(String accessurl) {
+        this.accessurl = accessurl;
+    }
 }
+
+
+

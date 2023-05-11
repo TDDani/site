@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface BeatRepository extends CrudRepository<Beat, Long> {
 
-    Optional<Beat> getById(long id);
+    Optional<Beat> getById(Long id);
 
     Optional<Beat> findBeatByTitle(String title);
 

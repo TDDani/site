@@ -2,23 +2,28 @@ package com.example.xowrld.Controller;
 
 import com.example.xowrld.Config.WebSecConfig;
 import com.example.xowrld.EmailSenderService.EmailSenderService;
-import com.example.xowrld.Model.AppUser;
-import com.example.xowrld.Model.Message;
-import com.example.xowrld.Model.ROLE;
-import com.example.xowrld.Model.SoldBeat;
-import com.example.xowrld.Repository.AppUserRepo;
-import com.example.xowrld.Repository.BeatRepository;
-import com.example.xowrld.Repository.SoldBeatRepository;
+import com.example.xowrld.Model.*;
+import com.example.xowrld.Repository.*;
 import com.example.xowrld.Service.AppUserService;
+
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+import java.time.*;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -26,7 +31,6 @@ public class MainController {
 
     @Autowired
     private BeatRepository beatRepository;
-
 
 
     @Autowired
@@ -39,10 +43,19 @@ public class MainController {
     private SoldBeatRepository soldBeatRepository;
 
     @Autowired
+    private UpcomingEventRepo upcomingEventRepo;
+
+    @Autowired
     private AppUserRepo appUserRepo;
 
     @Autowired
     private WebSecConfig webSecConfig;
+
+    @Autowired
+    private ArticleRepository articleRepository;
+
+    @Autowired
+    private PurchaseRepo purchaseRepo;
 
     @Value("${SITE_USERNAME")
     private String username;
@@ -50,24 +63,28 @@ public class MainController {
     private String password;
 
 
-
-
     @GetMapping("/about")
-    public String getabout(){
-        Optional<AppUser> temp = appUserRepo.findByUsername("csuRt78jr");
-        if(!temp.isPresent()){
-            AppUser user = new AppUser("csuRt78jr", webSecConfig.encoder().encode("65%1Ven891"), ROLE.valueOf(String.valueOf(ROLE.ADMIN)));
-            user.setEnabled(true);
-            appUserRepo.save(user);
-            return "personal/about";
+    public String getabout(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication instanceof UsernamePasswordAuthenticationToken) {
+            AppUser currentUser = (AppUser) authentication.getPrincipal();
+            Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
+            model.addAttribute("points",  user.get().getFloaters());
+            model.addAttribute("redirectlink",  "/myaccount");
+        } else {
+            model.addAttribute("points", "LOGIN");
+            model.addAttribute("redirectlink",  "/login");
         }
         return "personal/about";
+
     }
+
     @GetMapping("/contact")
-    public String getcontact(Model model){
+    public String getcontact(Model model) {
         model.addAttribute("message", new Message());
         return "personal/contact";
     }
+
     @PostMapping("/contact")
     public String sendmessage(Message message) throws MessagingException {
         emailSenderService.contactemail("dancmacabre@gmail.com", message.getName(), message.getBody(), message.getEmail());
@@ -79,48 +96,166 @@ public class MainController {
 
 
 
+    @GetMapping("/")
+    public String gethomepage(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<UpcomingEvent> upcomingEvents = (List<UpcomingEvent>) upcomingEventRepo.findAllByOrderByTimeDesc();
+        int i = upcomingEvents.size();
+        List<Article> articles = (List<Article>) articleRepository.findAll();
+        int x = articles.size();
+        model.addAttribute("ue1", upcomingEvents.get(i-1));
+        model.addAttribute("ar1", articles.get(x-1));
+        model.addAttribute("ue2", upcomingEvents.get(i-2));
+        model.addAttribute("ar2", articles.get(x-2));
+        model.addAttribute("ue3", upcomingEvents.get(i-3));
+        model.addAttribute("ar3", articles.get(x-3));
+        model.addAttribute("ue4", upcomingEvents.get(i-4));
+        model.addAttribute("ar4", articles.get(x-4));
+        model.addAttribute("ue5", upcomingEvents.get(i-5));
+        model.addAttribute("ar5", articles.get(x-5));
+        model.addAttribute("ar6", articles.get(x-6));
+        if(authentication instanceof UsernamePasswordAuthenticationToken) {
+            AppUser currentUser = (AppUser) authentication.getPrincipal();
+            Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
+            model.addAttribute("points",  user.get().getFloaters());
+            model.addAttribute("userid",  user.get().getId());
+            model.addAttribute("redirectlink",  "/myaccount");
+            return "homepage";
+        } else {
+            model.addAttribute("points", "LOGIN");
+            model.addAttribute("redirectlink",  "/login");
+            model.addAttribute("myDateTime", "2023-04-23T16:00:00");
+            return "homepage";
+        }
 
-    @GetMapping(value = {"/register"})
-    public String saveUserPage(Model model) {
-        model.addAttribute("user", new AppUser());
 
-        return "register/saveuser";
     }
 
-    @PostMapping(value = {"/register"})
-    public String saveUser(AppUser user) {
-        appUserService.saveUser(user);
+    @GetMapping("/newupcomingevent")
+    public String newupcevent(Model model){
+        model.addAttribute("event", new UpcomingEvent());
 
-        return "redirect:/login";
+        return "article/newupcomingevent";
     }
 
-    @GetMapping(value = {"/login"})
-    public String loginPage() {
-        return "register/login";
+    @PostMapping("/newupcomingevent")
+    public String newupc(@RequestParam("title") String title, @RequestParam("date") String date, @RequestParam("link") String link){
+        UpcomingEvent upcomingEvent = new UpcomingEvent();
+        upcomingEvent.setLink(link);
+        upcomingEvent.setTitle(title);
+        upcomingEvent.setTime(date);
+        upcomingEventRepo.save(upcomingEvent);
+
+        return "redirect:/";
     }
 
+    @GetMapping("/controlevents")
+    public String controlevent(Model model){
+       model.addAttribute("uclist", upcomingEventRepo.findAllByOrderByTimeAsc());
+        return "article/controlevent";
+    }
 
-    @GetMapping("/error")
-    public String lost(){
-        return "errorpage";
+    @GetMapping("/remove/upcomingevent/{id}")
+    public String remove(@PathVariable("id") Long id){
+        Optional<UpcomingEvent> uc = upcomingEventRepo.findById(id);
+
+        upcomingEventRepo.delete(uc.get());
+
+        return "redirect:/controlevents";
+    }
+
+    @GetMapping("/adminhub")
+    public String adminhub(Model model){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String points;
+        String redirectlink;
+        if(authentication instanceof UsernamePasswordAuthenticationToken) {
+            AppUser currentUser = (AppUser) authentication.getPrincipal();
+            Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
+            points = String.valueOf(user.get().getFloaters());
+            redirectlink = "/myaccount";
+        } else {
+
+            points =  "LOGIN";
+            redirectlink = "/myaccount";
+
+        }
+        model.addAttribute("points", points);
+        model.addAttribute("redirectlink",  redirectlink);
+
+
+        return "admin/adminhub";
     }
 
     @GetMapping("/summary")
     public String summary(Model model){
 
-        List<SoldBeat>soldBeats = (List<SoldBeat>) soldBeatRepository.findAll();
-
-        model.addAttribute("allsoldbeats" ,soldBeatRepository.findAll());
-        model.addAttribute("soldbeats", soldBeatRepository.findAll().spliterator().getExactSizeIfKnown());
-        int revenue = 0;
-        for(int i = 0; i<soldBeats.size(); i++){
-            revenue += soldBeats.get(i).getPrice()/100;
-        }
-        model.addAttribute("revenue", revenue);
 
 
-
+        model.addAttribute("purchases", purchaseRepo.findAllByOrderByTime());
         return "personal/summary";
     }
+
+    @GetMapping("/myaccount")
+    public String myaccount(Model model){
+
+
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AppUser currentUser = (AppUser) authentication.getPrincipal();
+        Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
+        model.addAttribute("username", user.get().getUsername());
+        model.addAttribute("user", user.get());
+        model.addAttribute("points",  user.get().getFloaters());
+        model.addAttribute("redirectlink",  "/myaccount");
+
+
+        return "personal/myaccount";
+    }
+
+    @PostMapping("/sendfloaters")
+    public String sendfloaters(@RequestParam("username") String username, Model model){
+
+
+
+
+        model.addAttribute("errormessage", "");
+
+        model.addAttribute("username", username);
+
+        return "personal/sendfloaters";
+    }
+
+    @PostMapping("/sendfloaters2")
+    public String sendfloa(@RequestParam("username") String username, Model model, @RequestParam("amount") int amount, @RequestParam("tousername") String tousername){
+        Optional<AppUser> appUser1 = appUserRepo.findByUsername(username);
+        Optional<AppUser> appUser2 = appUserRepo.findByUsername(tousername);
+        if(!appUser2.isPresent()) {
+            model.addAttribute("username", username);
+            model.addAttribute("errormessage", "User " + tousername + " cannot be found");
+            return "personal/sendfloaters";
+        } else if(appUser1.get().getFloaters()<amount){
+            model.addAttribute("username", username);
+            model.addAttribute("errormessage", "*Insufficent funds");
+            return "personal/sendfloaters";
+        }
+        appUser1.get().setFloaters(appUser1.get().getFloaters()-amount);
+        appUserRepo.save(appUser1.get());
+
+        appUser2.get().setFloaters(appUser2.get().getFloaters()+amount);
+        appUserRepo.save(appUser2.get());
+
+        return "redirect:/myaccount";
+    }
+
+
+
+
+
+
+
+
 
 }

@@ -25,6 +25,8 @@ public class AppUser implements UserDetails {
     @Column(unique = true, columnDefinition="TEXT")
     private String username;
 
+    private String email;
+
 
     @Column( columnDefinition="TEXT")
     private String password;
@@ -35,6 +37,12 @@ public class AppUser implements UserDetails {
 
     @ColumnDefault(value = "true")
     private boolean isEnabled;
+
+    private int floaters;
+
+    private boolean isauthenticated;
+
+    private String verificationcode;
 
     @CreationTimestamp
     private LocalDateTime registrationTime;
@@ -56,7 +64,8 @@ public class AppUser implements UserDetails {
         this.registrationTime = registrationTime;
     }
 
-    public long getId() {
+
+    public Long getId() {
         return id;
     }
 
@@ -146,5 +155,63 @@ public class AppUser implements UserDetails {
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    public AppUser(String username, String email, String password, ROLE role) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public AppUser(String username, String email, String password, ROLE role, boolean isEnabled, int floaters, LocalDateTime registrationTime) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.isEnabled = isEnabled;
+        this.floaters = floaters;
+        this.registrationTime = registrationTime;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getFloaters() {
+        return floaters;
+    }
+
+    public void setFloaters(int floaters) {
+        this.floaters = floaters;
+    }
+
+    public boolean isIsauthenticated() {
+        return isauthenticated;
+    }
+
+    public void setIsauthenticated(boolean isauthenticated) {
+        this.isauthenticated = isauthenticated;
+    }
+
+    public String getVerificationcode() {
+        return verificationcode;
+    }
+
+    public void setVerificationcode(String verificationcode) {
+        this.verificationcode = verificationcode;
+    }
+
+    public AppUser(String username, String email, String password, ROLE role, int floaters, String verificationcode) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.floaters = floaters;
+        this.verificationcode = verificationcode;
     }
 }
