@@ -32,6 +32,14 @@ public class LineRunner  implements CommandLineRunner {
     @Autowired
     private BeatRepository beatRepository;
 
+    public LineRunner(ArticleRepository articleRepository, AppUserRepo appUserRepo, WebSecConfig webSecConfig, UpcomingEventRepo upcomingEventRepo, BeatRepository beatRepository) {
+        this.articleRepository = articleRepository;
+        this.appUserRepo = appUserRepo;
+        this.webSecConfig = webSecConfig;
+        this.upcomingEventRepo = upcomingEventRepo;
+        this.beatRepository = beatRepository;
+    }
+
     @Override
     public void run(String... args) throws Exception {
         articleRepository.save(new Article("https://www.dropbox.com/s/p7dj8ed1ceedc75/IMG_20230423_144953.jpg?raw=1", "We moved to LA", "Los Angeles, or simply LA, is a sprawling metropolis located in the southern part of California, USA. With a population of over 4 million people, LA is the second-most populous city in the United States and one of the largest cities in the world.\n" +
@@ -41,10 +49,10 @@ public class LineRunner  implements CommandLineRunner {
                 "LA is a city that offers something for everyone. Its beaches, including Santa Monica and Venice Beach, are a popular destination for tourists and locals alike. The iconic Santa Monica Pier, with its amusement park and aquarium, is a must-see attraction.\n" +
                 "\n" +
                 "In addition to its beaches, LA is home to many museums and cultural institutions, such as the Getty Center and the Museum of Contemporary Art. The city's ethnic neighborhoods, such as Chinatown and Little Tokyo, offer a glimpse into the diverse cultures that make up the city's population.",  LocalDate.now()));
-        upcomingEventRepo.save(new UpcomingEvent("Danc  Macabre moving to LA","2023-05-23T16:00", "https://www.twitch.tv/dancmacabree" ));
-        upcomingEventRepo.save(new UpcomingEvent("Next Victory Cash Cup with my bro totinnyo after we go out in barcelona lets goo","2023-05-07T16:00", "https://www.twitch.tv/dancmacabree" ));
-        upcomingEventRepo.save(new UpcomingEvent("Danc  Macabre moving to LA","2025-05-23T16:00", "https://www.twitch.tv/dancmacabree" ));
-        upcomingEventRepo.save(new UpcomingEvent("Danc  Macabre moving to LA","2025-05-23T16:00", "https://www.twitch.tv/dancmacabree" ));
+        upcomingEventRepo.save(new UpcomingEvent("Danc  Macabre movring to LA","2023-05-23T16:00", "https://www.twitch.tv/dancmacabree" ));
+        upcomingEventRepo.save(new UpcomingEvent("Next Victory Cash3 Cup with my bro totinnyo after we go out in barcelona lets goo","2023-05-07T16:00", "https://www.twitch.tv/dancmacabree" ));
+        upcomingEventRepo.save(new UpcomingEvent("Danc  Macabre mov4ing to LA","2025-05-23T16:00", "https://www.twitch.tv/dancmacabree" ));
+        upcomingEventRepo.save(new UpcomingEvent("Danc  Macabre movinrg to LA","2025-05-23T16:00", "https://www.twitch.tv/dancmacabree" ));
         upcomingEventRepo.save(new UpcomingEvent("Danc  Macabre moving to LA Next Victory Cash Cup with my bro totinnyo after we go out in barcelona lets goo" ,"2023-05-23T16:00", "https://www.twitch.tv/dancmacabree" ));
         upcomingEventRepo.save(new UpcomingEvent("Birthday","2023-05-04T15:00", "https://www.twitch.tv/dancmacabree" ));
         appUserRepo.save(new AppUser("dancmacabre",  "tothd0504@gmail.com" , webSecConfig.encoder().encode("dd"), ROLE.ADMIN , 300, TokenGenerator.generateToken()));

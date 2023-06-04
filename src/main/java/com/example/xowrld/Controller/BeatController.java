@@ -37,10 +37,7 @@ public class BeatController {
     @Autowired
     private AppUserRepo appUserRepo;
 
-    @Value("${SITE_USERNAME")
-    private String username;
-    @Value("${SITE_PASSWORD")
-    private String password;
+
 
     @Autowired
     private BeatRepository beatRepository;

@@ -1,13 +1,9 @@
 package com.example.xowrld.Model;
 
 
-import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Article {
@@ -22,6 +18,7 @@ public class Article {
 
     @Column(columnDefinition = "LONGTEXT")
     private String body;
+
 
     private LocalDate created;
 
@@ -80,4 +77,6 @@ public class Article {
         this.body = body;
         this.created = created;
     }
+
+
 }

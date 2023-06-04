@@ -42,6 +42,7 @@ public class ChargeController {
     @Autowired
     private BeatRepository beatRepository;
 
+
     @Autowired
     private AppUserRepo appUserRepo;
 
