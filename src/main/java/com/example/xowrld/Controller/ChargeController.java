@@ -12,7 +12,6 @@ import com.example.xowrld.Repository.SoldBeatRepository;
 import com.example.xowrld.Service.StripeService;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
