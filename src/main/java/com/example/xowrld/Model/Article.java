@@ -16,7 +16,7 @@ public class Article {
 
     private String title;
 
-    @Column(columnDefinition = "LONGTEXT")
+    @Column(columnDefinition = "TEXT")
     private String body;
 
 
