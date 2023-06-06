@@ -117,6 +117,13 @@ public class MainController {
         if(authentication instanceof UsernamePasswordAuthenticationToken) {
             AppUser currentUser = (AppUser) authentication.getPrincipal();
             Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
+            if(user.get().getUsername().equals("dancmacabre")){
+                model.addAttribute("adminlink", "/adminhub");
+                model.addAttribute("adminbutton", "Adminhub");
+            } else {
+                model.addAttribute("adminlink", "");
+                model.addAttribute("adminbutton", "");
+            }
             model.addAttribute("points",  user.get().getFloaters());
             model.addAttribute("userid",  user.get().getId());
             model.addAttribute("redirectlink",  "/myaccount");
