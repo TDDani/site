@@ -91,6 +91,7 @@ public class RegisterController {
             AppUser user = new AppUser(username, email, webSecConfig.encoder().encode(password1), ROLE.USER);
             user.setVerificationcode(TokenGenerator.generateToken());
             model.addAttribute("email", user.getEmail());
+            user.setFloaters(2);
             appUserRepo.save(user);
             model.addAttribute("verifytext", "VERIFY");
             model.addAttribute("verifybutton", "Send");
