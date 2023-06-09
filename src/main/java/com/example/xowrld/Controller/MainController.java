@@ -257,6 +257,13 @@ public class MainController {
         return "redirect:/myaccount";
     }
 
+    @GetMapping("/removearticle/{id}")
+    public String removearticle(@PathVariable("id") Long id){
+        articleRepository.delete(articleRepository.findById(id));
+
+        return "redirect:/";
+    }
+
 
 
 
