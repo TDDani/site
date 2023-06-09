@@ -259,7 +259,7 @@ public class MainController {
 
     @GetMapping("/removearticle/{id}")
     public String removearticle(@PathVariable("id") Long id){
-        articleRepository.delete(articleRepository.findById(id));
+        articleRepository.delete(articleRepository.findById(id).get());
 
         return "redirect:/";
     }

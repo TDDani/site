@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface ArticleRepository extends CrudRepository<Article, Long> {
-    void delete(Optional<Article> byId);
+
 }
