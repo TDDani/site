@@ -40,7 +40,7 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/adminhub","/newupcomingevent","/controlevents","/newbeat", "/controlprizes","/newarticle", "/summary", "/sendnewsletter").hasAuthority(String.valueOf(ROLE.ADMIN))
+                .antMatchers("/adminhub", "/editbeat/*", "/removebeat/*","/newupcomingevent","/controlevents","/newbeat", "/controlprizes","/newarticle", "/summary", "/sendnewsletter").hasAuthority(String.valueOf(ROLE.ADMIN))
                 .antMatchers("/buyfloaters", "/myaccount", "/sendfloaters").authenticated()
                 .antMatchers("/findbeat", "/contact", "/about", "/view/*", "/sendverification/*","/coverphoto/*", "/photo/*", "/*.css", "/charge", "/*.png", "/images/*", "/*", "/readarticle/*", "/register", "https://www.dropbox.com/*", "/viewbeat/*").permitAll()
                 .anyRequest().authenticated();
