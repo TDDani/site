@@ -1,11 +1,17 @@
 package com.example.xowrld.Controller;
 
 
+import com.example.xowrld.Model.AppUser;
 import com.example.xowrld.Model.Beat;
+import com.example.xowrld.Model.ChargeRequest;
+import com.example.xowrld.Repository.AppUserRepo;
 import com.example.xowrld.Repository.ArticleRepository;
 import com.example.xowrld.Repository.BeatRepository;
 import com.example.xowrld.Service.RawGoogleDriveLink;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +32,12 @@ public class AdminController {
 
     @Autowired
     private ArticleRepository articleRepositor;
+
+    @Autowired
+    private AppUserRepo appUserRepo;
+
+    @Value("STRIPE_PUBLIC_KEY")
+    public String stripePublicKey;
 
     @GetMapping("/editbeat/{title}")
     public String editbeat(@PathVariable("title")  Long title, Model model){
@@ -60,5 +72,25 @@ public class AdminController {
         beatRepository.delete(beatRepository.getById(title).get());
 
         return "redirect:/findbeat";
+    }
+
+    @GetMapping("/choosepaymentmethod")
+    public String choosepayment(Model model){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AppUser currentUser = (AppUser) authentication.getPrincipal();
+        Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
+
+        model.addAttribute("username", user.get().getUsername());
+        model.addAttribute("points", user.get().getFloaters());
+        model.addAttribute("email", user.get().getEmail());
+
+
+        model.addAttribute("amount",  1000); // in cents
+        model.addAttribute("stripePublicKey", stripePublicKey);
+        model.addAttribute("currency", ChargeRequest.Currency.USD);
+        model.addAttribute("de", "Floater Purchase");
+
+        return "personal/paymentmethod";
     }
 }

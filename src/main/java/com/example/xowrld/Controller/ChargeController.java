@@ -18,15 +18,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -103,6 +101,10 @@ public class ChargeController {
     @GetMapping("/buyfloaters")
     public String buyfloaters(Model model){
 
+        List<AppUser> appUserList = (List<AppUser>) appUserRepo.findAll();
+
+        System.out.println(appUserList.size());
+
 
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -121,4 +123,31 @@ public class ChargeController {
 
         return "personal/buyfloaters";
     }
+
+    @GetMapping("/{id}/successfullpurchase1")
+    public String succesffulpurchase1(@PathVariable("id") String sessionid){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AppUser currentUser = (AppUser) authentication.getPrincipal();
+        Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
+        user.get().setFloaters(user.get().getFloaters()+5);
+
+        System.out.println("floateradded");
+        appUserRepo.save(user);
+
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/{id}/successfullpurchase2")
+    public String succesffulpurchase2(@PathVariable("id") String sessionid){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AppUser currentUser = (AppUser) authentication.getPrincipal();
+        Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
+        user.get().setFloaters(user.get().getFloaters()+15);
+        appUserRepo.save(user);
+
+
+        return "redirect:/";
+    }
+}
 }

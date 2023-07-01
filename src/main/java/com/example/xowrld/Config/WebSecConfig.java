@@ -41,7 +41,7 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/adminhub", "/editbeat/*", "/removebeat/*","/newupcomingevent","/controlevents","/newbeat", "/controlprizes","/newarticle", "/summary", "/sendnewsletter").hasAuthority(String.valueOf(ROLE.ADMIN))
-                .antMatchers("/buyfloaters", "/myaccount", "/sendfloaters").authenticated()
+                .antMatchers("/buyfloaters", "/myaccount", "/sendfloaters", "/*/successfullpurchase1").authenticated()
                 .antMatchers("/findbeat", "/contact", "/about", "/view/*", "/sendverification/*","/coverphoto/*", "/photo/*", "/*.css", "/charge", "/*.png", "/images/*", "/*", "/readarticle/*", "/register", "https://www.dropbox.com/*", "/viewbeat/*").permitAll()
                 .anyRequest().authenticated();
 
