@@ -140,7 +140,7 @@ public class ChargeController {
         return "redirect:/tryagainpurchase";
     }
 
-    @GetMapping("/{purchaseid}/successfullpurchase1")
+    @GetMapping("/{purchaseid}/successfullpurchase2")
     public String succesffulpurchase2(@PathVariable("purchaseid") String purchaseid){
         if(purchaseid.equals(purchasecode)) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
