@@ -126,20 +126,32 @@ public class ChargeController {
         return "personal/buyfloaters";
     }
 
-    @GetMapping("/{purchaseid}/successfullpurchase")
+    @GetMapping("/{purchaseid}/successfullpurchase1")
     public String succesffulpurchase1(@PathVariable("purchaseid") String purchaseid){
-
-        if(purchaseid.equals("89542316452643725242712452468996")) {
+        if(purchaseid.equals(purchasecode)) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             AppUser currentUser = (AppUser) authentication.getPrincipal();
             Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
             user.get().setFloaters(user.get().getFloaters() + 5);
-            System.out.println("floateradded");
             appUserRepo.save(user.get());
 
-            return "personal/succesfullpurchase";
+            return "redirect:/succesfullpurchase";
         }
-        return "personal/tryagainpurchase";
+        return "redirect:/tryagainpurchase";
+    }
+
+    @GetMapping("/{purchaseid}/successfullpurchase1")
+    public String succesffulpurchase2(@PathVariable("purchaseid") String purchaseid){
+        if(purchaseid.equals(purchasecode)) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            AppUser currentUser = (AppUser) authentication.getPrincipal();
+            Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
+            user.get().setFloaters(user.get().getFloaters() + 15);
+            appUserRepo.save(user.get());
+
+            return "redirect:/succesfullpurchase";
+        }
+        return "redirect:/tryagainpurchase";
     }
 
     @GetMapping("/tryagainpurchase")
@@ -152,15 +164,4 @@ public class ChargeController {
         return "personal/succesfullpurchase";
     }
 
-    @GetMapping("/{id}/successfullpurchase2")
-    public String succesffulpurchase2(@PathVariable("id") String sessionid){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        AppUser currentUser = (AppUser) authentication.getPrincipal();
-        Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
-        user.get().setFloaters(user.get().getFloaters()+15);
-        appUserRepo.save(user);
-
-
-        return "redirect:/";
-    }
 }

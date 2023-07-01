@@ -74,10 +74,17 @@ public class AdminController {
         return "redirect:/findbeat";
     }
 
-    @GetMapping("/choosepaymentmethod")
-    public String choosepayment(Model model){
+    @GetMapping("/choosepaymentmethod1")
+    public String choosepayment1(Model model){
 
 
-        return "personal/paymentmethod";
+        return "personal/paymentmethod1";
+    }
+
+    @GetMapping("/choosepaymentmethod2")
+    public String choosepayment2(Model model){
+
+
+        return "personal/paymentmethod2";
     }
 }
