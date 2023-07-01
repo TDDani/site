@@ -137,9 +137,9 @@ public class ChargeController {
             System.out.println("floateradded");
             appUserRepo.save(user.get());
 
-            return "redirect:/succesfullpurchase";
+            return "personal/succesfullpurchase";
         }
-        return "redirect:/tryagainpurchase";
+        return "personal/tryagainpurchase";
     }
 
     @GetMapping("/tryagainpurchase")
