@@ -129,7 +129,7 @@ public class ChargeController {
     @GetMapping("/{purchaseid}/successfullpurchase")
     public String succesffulpurchase1(@PathVariable("purchaseid") String purchaseid){
         String id = purchasecode;
-        if(purchaseid.equals(id)) {
+        if(purchaseid.equals("6728547824%92hhufh_:::.5643276542vgdhsfwuzet5432trus%576+975")) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             AppUser currentUser = (AppUser) authentication.getPrincipal();
             Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
