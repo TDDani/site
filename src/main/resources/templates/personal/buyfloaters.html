@@ -83,7 +83,7 @@
           </span>
                 <h3 class="u-align-center u-text u-text-default u-text-2">Normal - 2.5$</h3>
                 <p class="u-align-center u-text u-text-3">You will recieve 5 floaters</p>
-                <a data-th-href="@{/choosepaymentmethod}"class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-2-light-1 u-btn u-button-style u-none u-text-body-alt-color u-btn-1">purchase</a>
+                <a data-th-href="@{/choosepaymentmethod}" class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-2-light-1 u-btn u-button-style u-none u-text-body-alt-color u-btn-1">purchase</a>
               </div>
             </div>
             <div class="u-align-center u-container-style u-list-item u-opacity u-opacity-80 u-palette-1-light-1 u-repeater-item u-list-item-2">
@@ -115,71 +115,8 @@
         </div>
     </section>
 
-  <form data-th-action="@{/choosepaymentmethod}" method="post" hidden="">
-      <input type="hidden" data-th-value="${username}" id="username1" name="username">
-      <input type="hidden" data-th-value="${email}" id="email1">
-  </form>
-
-  <form data-th-action="@{/choosepaymentmethod}" method="post" hidden="">
-      <input type="hidden" data-th-value="${username}" id="username2" name="username">
-      <input type="hidden" data-th-value="${email}" id="email2">
-  </form>
-
-  <input id="stripepublickey" type="hidden" data-th-value="${stripePublicKey}">
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://checkout.stripe.com/checkout.js?pk_live_51MI59JBHGEliajuOa6oKRsRqI8kOoWt5F4Ra9ioM5c0LxyyHn9wZDyNXGW4r5RdxpcDbSI1WaYqHoM0Vz8iSMBsJ00WLzwUFwK"></script><script>
-      $('.my-pay-button-2').on('click', function() {
 
 
-          var amount = 500; // get amount value from Thymeleaf
-          const username = document.getElementById("username2").value;
-          const email = document.getElementById("email2").value;
-          const stripepublickey = document.getElementById("stripepublickey").value;
-          var handler = StripeCheckout.configure({
-
-              key: stripepublickey,
-              amount: amount,
-              currency: 'USD',
-              description: username,
-              token: function(token) {
-                  // Submit the form with the token ID
-                  var form = $('#checkout-form-2');
-                  form.append($('<input type="hidden" name="stripeToken">').val(token.id));
-                  form.get(0).submit();
-              }
-          });
-          handler.open({
-              name: 'Floater Purchase',
-              email: email
-          });
-      });
-  </script>
-  <script>
-      $('.my-pay-button-1').on('click', function() {
-          var amount = 250; // get amount value from Thymeleaf
-          const username = document.getElementById("username2").value;
-          const email = document.getElementById("email2").value;
-          const stripepublickey = document.getElementById("stripepublickey").value;
-          var handler = StripeCheckout.configure({
-
-              key: stripepublickey,
-              amount: amount,
-              currency: 'USD',
-              description: username,
-              token: function(token) {
-                  // Submit the form with the token ID
-                  var form = $('#checkout-form-1');
-                  form.append($('<input type="hidden" name="stripeToken">').val(token.id));
-                  form.get(0).submit();
-              }
-          });
-          handler.open({
-              name: 'Floater Purchase',
-              email: email
-          });
-      });
-  </script>
 
   <!-- Add a hidden form for submitting the payment data -->
     
