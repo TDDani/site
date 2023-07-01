@@ -149,7 +149,7 @@ public class ChargeController {
 
     @GetMapping("/successfullpurchase")
     public String success(){
-        return "personal/successfullpurchase";
+        return "personal/succesfullpurchase";
     }
 
     @GetMapping("/{id}/successfullpurchase2")
