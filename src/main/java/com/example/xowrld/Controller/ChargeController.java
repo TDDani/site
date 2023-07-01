@@ -126,7 +126,7 @@ public class ChargeController {
         return "personal/buyfloaters";
     }
 
-    @PostMapping("/{purchaseid}/successfullpurchase")
+    @GetMapping("/{purchaseid}/successfullpurchase")
     public String succesffulpurchase1(@PathVariable("purchaseid") String purchaseid){
         String id = purchasecode;
         if(purchaseid.equals(id)) {
@@ -139,7 +139,7 @@ public class ChargeController {
 
             return "redirect:/succesfullpurchase";
         }
-        return "redirect:/tryyagainpurchase";
+        return "redirect:/tryagainpurchase";
     }
 
     @GetMapping("/tryagainpurchase")
