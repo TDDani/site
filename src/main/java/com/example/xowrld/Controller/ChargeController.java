@@ -126,9 +126,10 @@ public class ChargeController {
         return "personal/buyfloaters";
     }
 
-    @GetMapping("/{PURCHASEID}/successfullpurchase")
-    public String succesffulpurchase1(@PathVariable("PURCHASEID") String purchaseid){
-        if(purchaseid.equals(purchasecode)) {
+    @GetMapping("/{purchaseid}/successfullpurchase")
+    public String succesffulpurchase1(@PathVariable("purchaseid") String purchaseid){
+        String id = purchasecode;
+        if(purchaseid.equals(id)) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             AppUser currentUser = (AppUser) authentication.getPrincipal();
             Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
@@ -136,9 +137,19 @@ public class ChargeController {
             System.out.println("floateradded");
             appUserRepo.save(user.get());
 
-            return "personal/succesfullpurchase";
+            return "redirect:/succesfullpurchase";
         }
+        return "redirect:/tryyagainpurchase";
+    }
+
+    @GetMapping("/tryagainpurchase")
+    public String tryagain(){
         return "personal/tryagainpurchase";
+    }
+
+    @GetMapping("/successfullpurchase")
+    public String success(){
+        return "personal/successfullpurchase";
     }
 
     @GetMapping("/{id}/successfullpurchase2")
