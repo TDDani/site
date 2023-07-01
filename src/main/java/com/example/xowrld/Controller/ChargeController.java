@@ -124,8 +124,8 @@ public class ChargeController {
         return "personal/buyfloaters";
     }
 
-    @GetMapping("/{id}/successfullpurchase1")
-    public String succesffulpurchase1(@PathVariable("id") String sessionid){
+    @GetMapping("/successfullpurchase")
+    public String succesffulpurchase1(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         AppUser currentUser = (AppUser) authentication.getPrincipal();
         Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
