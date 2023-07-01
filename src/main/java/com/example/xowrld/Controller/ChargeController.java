@@ -48,6 +48,8 @@ public class ChargeController {
     @Value("${STRIPE_PUBLIC_KEY}")
     private String stripePublicKey;
 
+    @Value("PURCHASE_ID")
+    private String purchasecode;
 
 
     @PostMapping("/charge2")
@@ -124,18 +126,19 @@ public class ChargeController {
         return "personal/buyfloaters";
     }
 
-    @GetMapping("/successfullpurchase")
-    public String succesffulpurchase1(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        AppUser currentUser = (AppUser) authentication.getPrincipal();
-        Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
-        user.get().setFloaters(user.get().getFloaters()+5);
+    @GetMapping("/{PURCHASEID}/successfullpurchase")
+    public String succesffulpurchase1(@PathVariable("PURCHASEID") String purchaseid){
+        if(purchaseid.equals(purchasecode)) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            AppUser currentUser = (AppUser) authentication.getPrincipal();
+            Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
+            user.get().setFloaters(user.get().getFloaters() + 5);
+            System.out.println("floateradded");
+            appUserRepo.save(user.get());
 
-        System.out.println("floateradded");
-        appUserRepo.save(user);
-
-
-        return "redirect:/";
+            return "personal/succesfullpurchase";
+        }
+        return "personal/tryagainpurchase";
     }
 
     @GetMapping("/{id}/successfullpurchase2")
