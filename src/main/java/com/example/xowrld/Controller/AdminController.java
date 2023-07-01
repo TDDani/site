@@ -77,19 +77,6 @@ public class AdminController {
     @GetMapping("/choosepaymentmethod")
     public String choosepayment(Model model){
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        AppUser currentUser = (AppUser) authentication.getPrincipal();
-        Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
-
-        model.addAttribute("username", user.get().getUsername());
-        model.addAttribute("points", user.get().getFloaters());
-        model.addAttribute("email", user.get().getEmail());
-
-
-        model.addAttribute("amount",  1000); // in cents
-        model.addAttribute("stripePublicKey", stripePublicKey);
-        model.addAttribute("currency", ChargeRequest.Currency.USD);
-        model.addAttribute("de", "Floater Purchase");
 
         return "personal/paymentmethod";
     }
