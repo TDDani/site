@@ -102,4 +102,15 @@ public class AdminController {
         model.addAttribute("users", users);
         return "admin/usersummary";
     }
+
+    @GetMapping("/banuser/{id}")
+    public String banuser (@PathVariable("id") Long id) {
+
+        Optional<AppUser> appUser = appUserRepo.findById(id);
+
+        appUserRepo.delete(appUser.get());
+
+        return "redirect:/usersummary";
+    }
+
 }

@@ -16,6 +16,7 @@
         <td data-th-text="${elem.getUsername()}"></td>
         <td data-th-text="${elem.getEmail()}"></td>
         <td data-th-text="${elem.getFloaters()}"></td>
+        <td><a data-th-href="@{/banuser/{id}(id=${elem.getId()})}">Ban</a></td>
     </tr>
 </table>
 </body>
