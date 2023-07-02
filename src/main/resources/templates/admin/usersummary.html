@@ -6,11 +6,18 @@
 </head>
 <body>
 
+<h3>Search user</h3>
+<form data-th-action="@{/searchuser}" method="post">
+    <input type="text" name="data">
+    <button type="submit">Submit</button>
+</form>
+
 <table>
     <tr>
         <th>Username</th>
         <th>Email</th>
         <th>Floaters</th>
+        <th>Ban</th>
     </tr>
     <tr data-th-each="elem: ${users}">
         <td data-th-text="${elem.getUsername()}"></td>

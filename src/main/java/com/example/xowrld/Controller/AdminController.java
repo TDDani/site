@@ -7,6 +7,7 @@ import com.example.xowrld.Model.ChargeRequest;
 import com.example.xowrld.Repository.AppUserRepo;
 import com.example.xowrld.Repository.ArticleRepository;
 import com.example.xowrld.Repository.BeatRepository;
+import com.example.xowrld.Service.AppUserService;
 import com.example.xowrld.Service.RawGoogleDriveLink;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,8 +18,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +39,9 @@ public class AdminController {
 
     @Autowired
     private AppUserRepo appUserRepo;
+
+    @Autowired
+    private AppUserService appUserService;
 
     @Value("STRIPE_PUBLIC_KEY")
     public String stripePublicKey;
@@ -111,6 +117,28 @@ public class AdminController {
         appUserRepo.delete(appUser.get());
 
         return "redirect:/usersummary";
+    }
+
+    @GetMapping("/searchuser")
+    public String searchuser(Model model, @RequestParam("data") String data){
+        List<AppUser> users = new ArrayList<>();
+        List<AppUser> allusers = (List<AppUser>) appUserRepo.findAll();
+
+        for(int i = 0; i<allusers.size(); i++){
+            if(appUserService.checkText(appUserRepo, allusers.get(i).getUsername(), data) != null){
+                allusers.add(allusers.get(i));
+            }
+        }
+
+        for(int i = 0; i<allusers.size(); i++){
+            if(appUserService.checkText(appUserRepo, allusers.get(i).getEmail(), data) != null){
+                allusers.add(allusers.get(i));
+            }
+        }
+
+        model.addAttribute("users", users);
+
+        return "admin/usersummary";
     }
 
 }
