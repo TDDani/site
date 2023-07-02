@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -77,6 +78,13 @@ public class AdminController {
     @GetMapping("/choosepaymentmethod1")
     public String choosepayment1(Model model){
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AppUser currentUser = (AppUser) authentication.getPrincipal();
+        Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
+
+        model.addAttribute("username", user.get().getUsername());
+        model.addAttribute("points", user.get().getFloaters());
+        model.addAttribute("email", user.get().getEmail());
 
         return "personal/paymentmethod1";
     }
@@ -86,5 +94,12 @@ public class AdminController {
 
 
         return "personal/paymentmethod2";
+    }
+
+    @GetMapping("/usersummary")
+    public String usersummary(Model model){
+        List<AppUser> users = (List<AppUser>) appUserRepo.findAll();
+        model.addAttribute("users", users);
+        return "admin/usersummary";
     }
 }

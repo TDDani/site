@@ -28,20 +28,37 @@
               <div class="u-container-style u-layout-cell u-palette-3-light-3 u-size-30 u-layout-cell-2">
                 <div class="u-container-layout u-valign-top-sm u-valign-top-xs u-container-layout-2">
                   <img class="u-expanded-width u-image u-image-default u-image-2" src="https://drive.google.com/u/0/uc?id=1RzRUtlHuZ4j1vVMG_m1naQTjMPE-q0PV&export=download" alt="" data-image-width="3210" data-image-height="1806">
-                  <a href="https://nicepage.com/wysiwyg-html-editor" class="u-border-2 u-border-black u-btn u-button-style u-hover-black u-none u-text-hover-white u-btn-2">CRYPTO</a>
+                  <a id="checkoutButton" th:data-custom="${username}" href="https://commerce.coinbase.com/checkout/be6c5e75-62e1-41c1-8a3e-0932af0a216a" class="u-border-2 u-border-black u-btn u-button-style u-hover-black u-none u-text-hover-white u-btn-2 buy-with-crypto">NOT AVAIBLE</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <a href="https://nicepage.com/k/card-html-templates" class="u-btn u-button-style u-none u-text-black u-text-hover-black u-btn-3">&nbsp;&lt;&lt;BACK</a>
+        <a data-th-href="@{/buyfloa
+    ters}" class="u-btn u-button-style u-none u-text-black u-text-hover-black u-btn-3">&nbsp;&lt;&lt;BACK</a>
       </div>
     </section>
-    
     
     <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-2837"><div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-small-text u-text u-text-variant u-text-1">Sample text. Click to select the Text Element.</p>
       </div></footer>
 
   
-</body></html>
+</body>
+<script src="https://commerce.coinbase.com/v1/checkout.js?onload"></script>
+<script>
+    // Get the checkout button element
+    var checkoutButton = document.getElementById('checkoutButton');
+
+    // Get the metadata from the data-custom attribute
+    var metadata = checkoutButton.getAttribute('data-custom');
+    console.log('Metadata:', metadata);
+
+    // Callback function for successful purchase
+    function onSuccessCallback(event) {
+        // Redirect to Google.com after successful purchase
+        window.location.href = "https://www.google.com?metadata=" + encodeURIComponent(metadata);
+    }
+</script>
+
+</html>
