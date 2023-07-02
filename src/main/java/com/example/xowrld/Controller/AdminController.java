@@ -120,7 +120,7 @@ public class AdminController {
     }
 
     @PostMapping ("/searchuser")
-    public String searchuser(Model model, @RequestParam("data") String data){
+    public String searchuser(Model model, @RequestParam("textyn") String data){
         List<AppUser> users = new ArrayList<>();
         List<AppUser> allusers = (List<AppUser>) appUserRepo.findAll();
 
