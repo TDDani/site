@@ -120,7 +120,7 @@
         <h1 class="u-text u-text-default u-text-4">Latest News</h1>
         <h1 class="u-text u-text-default u-text-5">Upcoming <span style="font-weight: 700;"></span>Events
         </h1>
-        <div class="u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-list u-list-1">
+        <div class="u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-list u-list-1>
           <div class="u-repeater u-repeater-1">
             <div class="u-container-style u-custom-color-1 u-list-item u-repeater-item u-list-item-1">
               <div class="u-container-layout u-similar-container u-valign-middle-sm u-container-layout-4">
@@ -130,57 +130,57 @@
             </div>
           </div>
         </div>
-        <div class="u-expanded-width-lg u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-list u-list-2">
+        <div class="u-expanded-width-lg u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-list u-list-2" >
           <div class="u-repeater u-repeater-2">
-            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item">
+            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item" data-th-if="${numofue} > 0">
               <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-5">
-                <h4 class="u-align-center u-hover-feature u-text u-text-7 countdown" data-th-data-date="${ue1.time}"></h4>
+                <h4 class="u-align-center u-hover-feature u-text u-text-7 countdown" data-th-if="${numofue} > 0" data-th-data-date="${ue1.time}"></h4>
               </div>
             </div>
-            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item">
+            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item" data-th-if="${numofue} > 0">
               <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-6">
-                <h4 class="u-align-center u-hover-feature u-text u-text-8"><a data-th-text="${ue1.title}" data-th-href="${ue1.link}"></a><br>
+                <h4 class="u-align-center u-hover-feature u-text u-text-8"><a data-th-if="${numofue} > 0" data-th-text="${ue1.title}" data-th-href="${ue1.link}"></a><br>
                 </h4>
               </div>
             </div>
-            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item">
+            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item" data-th-if="${numofue} > 1">
               <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-7">
-                <h4 class="u-align-center u-hover-feature u-text u-text-9 countdown" data-th-data-date="${ue2.time}"></h4>
+                <h4 class="u-align-center u-hover-feature u-text u-text-9 countdown"  data-th-if="${numofue} > 1" data-th-data-date="${ue2.time}"></h4>
               </div>
             </div>
-            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item">
+            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item" data-th-if="${numofue} > 1">
               <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-8">
-                <h4 class="u-align-center u-hover-feature u-text u-text-10"><a data-th-text="${ue2.title}" data-th-href="${ue2.link}"></a></h4>
+                <h4 class="u-align-center u-hover-feature u-text u-text-10"><a  data-th-if="${numofue} > 1" data-th-text="${ue2.title}" data-th-href="${ue2.link}"></a></h4>
               </div>
             </div>
-            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item">
+            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item" data-th-if="${numofue} > 2">
               <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-9">
-                <h4 class="u-align-center u-hover-feature u-text u-text-11 countdown" data-th-data-date="${ue3.time}"></h4>
+                <h4 class="u-align-center u-hover-feature u-text u-text-11 countdown"  data-th-if="${numofue} > 2" data-th-data-date="${ue3.time}"></h4>
               </div>
             </div>
-            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item">
+            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item" data-th-if="${numofue} > 2">
               <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-10">
-                <h4 class="u-align-center u-hover-feature u-text u-text-12"><a data-th-text="${ue3.title}" data-th-href="${ue3.link}"></a></h4>
+                <h4 class="u-align-center u-hover-feature u-text u-text-12"><a  data-th-if="${numofue} > 2" data-th-text="${ue3.title}" data-th-href="${ue3.link}"></a></h4>
               </div>
             </div>
-            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item">
+            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item"  data-th-if="${numofue} > 3" data-th-if="${numofue} > 3">
               <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-11">
-                <h4 class="u-align-center u-hover-feature u-text u-text-13 countdown" data-th-data-date="${ue4.time}"></h4>
+                <h4 class="u-align-center u-hover-feature u-text u-text-13 countdown"  data-th-if="${numofue} > 3" data-th-data-date="${ue4.time}"></h4>
               </div>
             </div>
-            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item">
+            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item" data-th-if="${numofue} > 3">
               <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-12">
-                <h4 class="u-align-center u-hover-feature u-text u-text-14"><a data-th-text="${ue4.title}" data-th-href="${ue4.link}"></a></h4>
+                <h4 class="u-align-center u-hover-feature u-text u-text-14"><a  data-th-if="${numofue} > 3" data-th-text="${ue4.title}" data-th-href="${ue4.link}"></a></h4>
               </div>
             </div>
-            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-13">
-                <h4 class="u-align-center u-hover-feature u-text u-text-15 countdown" data-th-data-date="${ue5.time}" ></h4>
+            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item" data-th-if="${numofue} > 4">
+              <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-13" data-th-if="${numofue} > 4">
+                <h4 class="u-align-center u-hover-feature u-text u-text-15 countdown"  data-th-if="${numofue} > 4" data-th-data-date="${ue5.time}" ></h4>
               </div>
             </div>
-            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item">
+            <div class="u-border-1 u-border-black u-container-style u-list-item u-repeater-item" data-th-if="${numofue} > 4">
               <div class="u-container-layout u-similar-container u-valign-middle u-container-layout-14">
-                <h4 class="u-align-center u-hover-feature u-text u-text-16"><a data-th-text="${ue5.title}" data-th-href="${ue5.link}"></a></h4>
+                <h4 class="u-align-center u-hover-feature u-text u-text-16"><a  data-th-if="${numofue} > 4" data-th-text="${ue5.title}" data-th-href="${ue5.link}"></a></h4>
               </div>
             </div>
           </div>

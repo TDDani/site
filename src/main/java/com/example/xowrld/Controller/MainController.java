@@ -114,6 +114,7 @@ public class MainController {
         model.addAttribute("ue5", upcomingEvents.get(i-5));
         model.addAttribute("ar5", articles.get(x-5));
         model.addAttribute("ar6", articles.get(x-6));
+        model.addAttribute("numofue", upcomingEventRepo.findAllByOrderByTimeDesc().size());
         if(authentication instanceof UsernamePasswordAuthenticationToken) {
             AppUser currentUser = (AppUser) authentication.getPrincipal();
             Optional<AppUser> user = appUserRepo.findById(currentUser.getId());
