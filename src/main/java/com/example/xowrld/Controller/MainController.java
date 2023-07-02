@@ -103,15 +103,30 @@ public class MainController {
         int i = upcomingEvents.size();
         List<Article> articles = (List<Article>) articleRepository.findAll();
         int x = articles.size();
-        model.addAttribute("ue1", upcomingEvents.get(i-1));
+        if(i>0) {
+            model.addAttribute("ue1", upcomingEvents.get(i - 1));
+        }
+        if(i>1){
+            model.addAttribute("ue2", upcomingEvents.get(i-2));
+        }
+        if(i>2){
+            model.addAttribute("ue3", upcomingEvents.get(i-3));
+        }
+
+        if(i>3){
+            model.addAttribute("ue4", upcomingEvents.get(i-4));
+        }
+        if(i>4){
+            model.addAttribute("ue5", upcomingEvents.get(i-5));
+        }
         model.addAttribute("ar1", articles.get(x-1));
-        model.addAttribute("ue2", upcomingEvents.get(i-2));
+
         model.addAttribute("ar2", articles.get(x-2));
-        model.addAttribute("ue3", upcomingEvents.get(i-3));
+
         model.addAttribute("ar3", articles.get(x-3));
-        model.addAttribute("ue4", upcomingEvents.get(i-4));
+
         model.addAttribute("ar4", articles.get(x-4));
-        model.addAttribute("ue5", upcomingEvents.get(i-5));
+
         model.addAttribute("ar5", articles.get(x-5));
         model.addAttribute("ar6", articles.get(x-6));
         model.addAttribute("numofue", upcomingEventRepo.findAllByOrderByTimeDesc().size());
