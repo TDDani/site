@@ -43,9 +43,6 @@ public class AdminController {
     @Autowired
     private AppUserService appUserService;
 
-    @Value("STRIPE_PUBLIC_KEY")
-    public String stripePublicKey;
-
     @GetMapping("/editbeat/{title}")
     public String editbeat(@PathVariable("title")  Long title, Model model){
        Optional<Beat> beat =  beatRepository.getById(title);
