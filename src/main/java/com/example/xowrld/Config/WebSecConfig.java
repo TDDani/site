@@ -40,9 +40,9 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/adminhub", "/editbeat/*", "/removebeat/*","/newupcomingevent","/controlevents","/newbeat", "/controlprizes","/newarticle", "/summary", "/sendnewsletter", "/usersummary").hasAuthority(String.valueOf(ROLE.ADMIN))
+                .antMatchers("/adminhub","/survivorsshowdowntable ","/editbeat/*", "/removebeat/*","/newupcomingevent","/controlevents","/newbeat", "/controlprizes","/newarticle", "/summary", "/sendnewsletter", "/usersummary").hasAuthority(String.valueOf(ROLE.ADMIN))
                 .antMatchers("/buyfloaters", "/myaccount", "/sendfloaters", "/*/successfullpurchase1").authenticated()
-                .antMatchers("/findbeat", "/contact", "/about", "/view/*", "/sendverification/*","/coverphoto/*", "/photo/*", "/*.css", "/charge", "/*.png", "/images/*", "/*", "/readarticle/*", "/register", "https://www.dropbox.com/*", "/viewbeat/*").permitAll()
+                .antMatchers("/survivorsshowdown/signup","/findbeat", "/contact", "/about", "/view/*", "/sendverification/*","/coverphoto/*", "/photo/*", "/*.css", "/charge", "/*.png", "/images/*", "/*", "/readarticle/*", "/register", "https://www.dropbox.com/*", "/viewbeat/*").permitAll()
                 .anyRequest().authenticated();
 
 

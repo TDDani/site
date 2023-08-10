@@ -31,8 +31,6 @@ import java.util.Optional;
 @Controller
 public class BeatController {
 
-    @Value("${STRIPE_PUBLIC_KEY}")
-    private String stripePublicKey;
 
     @Autowired
     private AppUserRepo appUserRepo;
@@ -100,7 +98,6 @@ public class BeatController {
         if(beat.isPresent()){
             model.addAttribute("beat", beat.get());
             model.addAttribute("amount",  beat.get().getPrice()*1000); // in cents
-            model.addAttribute("stripePublicKey", stripePublicKey);
             model.addAttribute("currency", ChargeRequest.Currency.USD);
             model.addAttribute("de", beat.get().getTitle());
             if(authentication instanceof UsernamePasswordAuthenticationToken) {
